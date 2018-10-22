@@ -46,3 +46,12 @@ jobs:
           destination: reports
       - store_test_results:
           path: app/build/test-results
+      - run:
+          name: Generate JaCoCo report
+          command: ./gradlew jacocoTestReport
+      - run:
+          name: Upload coverage to code climate
+          command: |
+            export JACOCO_SOURCE_PATH=app/src/main/java
+            ./cc-test-reporter format-coverage app/build/reports/coverage/debug/report.xml -t jacoco
+            ./cc-test-reporter upload-coverage
