@@ -7,19 +7,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.example.ivanpaulrutale.convergelevelup.model.DeveloperDataMapper;
 
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
-    public ListAdapter(List<ListItem> listItems, Context context) {
+    public ListAdapter(List<DeveloperDataMapper> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
     }
 
-    private List<ListItem> listItems;
+    private List<DeveloperDataMapper> listItems;
     private Context context;
 
     @NonNull
@@ -32,13 +35,16 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        final ListItem listItem = listItems.get(position);
-        viewHolder.username.setText(listItem.getUsername());
+        final DeveloperDataMapper listItem = listItems.get(position);
+        viewHolder.username.setText(listItem.getLogin());
+        Glide.with(context).load(listItem.getAvatarUrl()).into(viewHolder.imageView);
         viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ProfileDetails.class);
-                intent.putExtra("profile_url", listItem.getUsername());
+                Intent intent = new Intent(context, ProfileDetailsActivity.class);
+                intent.putExtra("profile_url", listItem.getUrl());
+                intent.putExtra("image_url", listItem.getAvatarUrl());
+
                 context.startActivity(intent);
             }
         });
@@ -53,11 +59,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
         public TextView username;
         public RelativeLayout relativeLayout;
+        public ImageView imageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.developer_username);
             relativeLayout = itemView.findViewById(R.id.list_item_layout);
+            imageView = itemView.findViewById(R.id.profile_image);
         }
     }
 }
