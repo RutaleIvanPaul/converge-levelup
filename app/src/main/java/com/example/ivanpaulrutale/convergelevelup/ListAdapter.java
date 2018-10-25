@@ -41,8 +41,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ProfileDetails.class);
-                intent.putExtra("profile_url", listItem.getLogin());
+                Intent intent = new Intent(context, ProfileDetailsActivity.class);
+                intent.putExtra("profile_url", listItem.getUrl());
+                intent.putExtra("image_url", listItem.getAvatarUrl());
+
                 context.startActivity(intent);
             }
         });

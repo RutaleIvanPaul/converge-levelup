@@ -40,6 +40,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:background="#03A9F4"
+        android:text="SHARE"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/colorAccent"
         tools:text="@string/share_profiles" />
