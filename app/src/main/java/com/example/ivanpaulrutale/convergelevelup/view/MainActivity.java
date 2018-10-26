@@ -1,6 +1,7 @@
 package com.example.ivanpaulrutale.convergelevelup.view;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +19,9 @@ public class MainActivity extends AppCompatActivity implements DeveloperView{
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private List<DeveloperDataMapper> listitems;
+    public final static String LIST_STATE_KEY = "recycler_list_state";
+    Parcelable listState;
+    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
 
     @Override
@@ -44,8 +48,31 @@ public class MainActivity extends AppCompatActivity implements DeveloperView{
     public void setRecyclerView(){
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapter);
 
+    }
+
+
+    protected void onSaveInstanceState(Bundle state) {
+        super.onSaveInstanceState(state);
+        // Save list state
+        listState = linearLayoutManager.onSaveInstanceState();
+        state.putParcelable(LIST_STATE_KEY, listState);
+    }
+
+    protected void onRestoreInstanceState(Bundle state) {
+        super.onRestoreInstanceState(state);
+        // Retrieve list state and list/item positions
+        if(state != null)
+            listState = state.getParcelable(LIST_STATE_KEY);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (listState != null) {
+            linearLayoutManager.onRestoreInstanceState(listState);
+        }
     }
 }
