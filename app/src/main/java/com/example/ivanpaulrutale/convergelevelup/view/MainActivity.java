@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.example.ivanpaulrutale.convergelevelup.ListAdapter;
+import com.example.ivanpaulrutale.convergelevelup.adapter.GithubAdapter;
 import com.example.ivanpaulrutale.convergelevelup.R;
 import com.example.ivanpaulrutale.convergelevelup.model.DeveloperDataMapper;
 import com.example.ivanpaulrutale.convergelevelup.presenter.DeveloperPresenter;
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements DeveloperView{
 
     @Override
     public void DevelopersReady(List<DeveloperDataMapper> developers) {
-        adapter = new ListAdapter(developers,this);
+        adapter = new GithubAdapter(developers,this);
         setRecyclerView();
 
         for (DeveloperDataMapper developerDataMapper: developers){
