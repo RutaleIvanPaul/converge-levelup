@@ -1,4 +1,4 @@
-package com.example.ivanpaulrutale.convergelevelup;
+package com.example.ivanpaulrutale.convergelevelup.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,12 +12,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.ivanpaulrutale.convergelevelup.ProfileDetailsActivity;
+import com.example.ivanpaulrutale.convergelevelup.R;
 import com.example.ivanpaulrutale.convergelevelup.model.DeveloperDataMapper;
 
 import java.util.List;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
-    public ListAdapter(List<DeveloperDataMapper> listItems, Context context) {
+public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.ViewHolder> {
+    public GithubAdapter(List<DeveloperDataMapper> listItems, Context context) {
         this.listItems = listItems;
         this.context = context;
     }
