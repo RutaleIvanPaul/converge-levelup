@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.ivanpaulrutale.convergelevelup.ProfileDetailsActivity;
+import com.example.ivanpaulrutale.convergelevelup.view.ProfileDetailsActivity;
 import com.example.ivanpaulrutale.convergelevelup.R;
 import com.example.ivanpaulrutale.convergelevelup.model.DeveloperDataMapper;
 
@@ -46,6 +46,7 @@ public class GithubAdapter extends RecyclerView.Adapter<GithubAdapter.ViewHolder
                 Intent intent = new Intent(context, ProfileDetailsActivity.class);
                 intent.putExtra("profile_url", listItem.getUrl());
                 intent.putExtra("image_url", listItem.getAvatarUrl());
+                intent.putExtra("username",listItem.getLogin());
 
                 context.startActivity(intent);
             }
