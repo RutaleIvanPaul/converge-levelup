@@ -93,5 +93,5 @@ public class MainActivity extends AppCompatActivity implements DeveloperView, Sw
         developerPresenter.getDeveloperNames();
         swipeRefreshLayout.setRefreshing(false);
     }
-    
+
 }
