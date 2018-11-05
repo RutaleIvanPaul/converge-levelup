@@ -9,9 +9,11 @@ public class MainJsonMapper {
     @SerializedName("total_count")
     @Expose
     private Integer totalCount;
+
     @SerializedName("incomplete_results")
     @Expose
     private Boolean incompleteResults;
+
     @SerializedName("items")
     @Expose
     private List<DeveloperDataMapper> items = null;
