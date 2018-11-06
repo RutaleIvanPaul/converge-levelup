@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ivanpaulrutale.convergelevelup">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +23,14 @@
         </activity>
         <activity android:name=".view.ProfileDetailsActivity"
             android:parentActivityName=".view.MainActivity"/>
+        <receiver
+            android:name=".util.NetworkUtility"
+            android:exported="false"
+            >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

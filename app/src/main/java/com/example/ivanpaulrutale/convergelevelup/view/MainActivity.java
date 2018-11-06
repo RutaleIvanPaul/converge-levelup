@@ -3,17 +3,18 @@ package com.example.ivanpaulrutale.convergelevelup.view;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.View;
 
-import com.example.ivanpaulrutale.convergelevelup.adapter.GithubAdapter;
 import com.example.ivanpaulrutale.convergelevelup.R;
+import com.example.ivanpaulrutale.convergelevelup.adapter.GithubAdapter;
 import com.example.ivanpaulrutale.convergelevelup.model.DeveloperDataMapper;
 import com.example.ivanpaulrutale.convergelevelup.presenter.DeveloperPresenter;
+import com.example.ivanpaulrutale.convergelevelup.util.NetworkUtility;
 
 import java.util.List;
 
@@ -45,6 +46,20 @@ public class MainActivity extends AppCompatActivity implements DeveloperView, Sw
 
         developerPresenter = new DeveloperPresenter(this);
         developerPresenter.getDeveloperNames();
+
+       if(!(NetworkUtility.isConnected(this))) {
+           progressDialog.dismiss();
+           Snackbar.make(
+                   findViewById(R.id.snackbarPosition),
+                   "No Internet Connection",
+                   Snackbar.LENGTH_INDEFINITE).setAction("Tap to Retry", new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   progressDialog.show();
+                   developerPresenter.getDeveloperNames();
+               }
+           }).show();
+       }
 
     }
 
